@@ -1,10 +1,78 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Collapse } from 'react-bootstrap'
 import uploadImg from '../assets/upload.png'
+import SERVER_BASE_URL from '../services/serverUrl';
+import {updateUserAPI} from '../services/allAPI'
 
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
+
+  const [preview,setPreview] = useState("")
+  const [existingProfilePic,setExistingProfilePic] = useState("")
+  //profilePic key of userDetails is ued to store upload user profile pic file
+  const [userDetails,setUserDetails] = useState({
+    username:"",email:"",password:"",github:"",linkedin:"",profilePic:""
+  })
+  console.log(userDetails);
+  //
+  useEffect(()=>{
+    if(sessionStorage.getItem("user")){
+      const user = JSON.parse(sessionStorage.getItem("user"))
+      setUserDetails({
+        ...userDetails,username:user.username,email:user.email,password:user.password,github:user.github,linkedin:user.linkedin
+      })
+      setExistingProfilePic(user.profilePic)
+    }
+  },[open])
+
+  useEffect(()=>{
+    if(userDetails.profilePic){
+      setPreview(URL.createObjectURL(userDetails.profilePic))
+    }else{
+      setPreview("")
+    }
+  },[userDetails.profilePic])
+
+  const handleUserUpdate = async ()=>{
+    //get all user details
+    const {username,email,password,github,linkedin,profilePic} = userDetails
+    //if text field have value
+    if(github && linkedin){
+      //req body
+      const reqBody = new FormData()
+      reqBody.append("username",username)
+      reqBody.append("email",email)
+      reqBody.append("password",password)
+      reqBody.append("github",github)
+      reqBody.append("linkedin",linkedin)
+      preview?reqBody.append("profilePic",profilePic):reqBody.append("profilePic",existingProfilePic)
+      //req header
+      const token = sessionStorage.getItem("token")
+      if(token){
+      const reqHeader = {
+        "Content-Type":"multipart/form-data",
+        "Authorization":`Bearer ${token}`
+      }
+      //make api call
+      try{
+        const result = await updateUserAPI(reqBody,reqHeader)
+        if(result.status==200){
+          //alert
+          alert("User Profile Updation Success!!!")
+          //store update user in session
+          sessionStorage.setItem("user",JSON.stringify(result.data))
+          //collapse profile
+          setOpen(!open)
+        }
+      }catch(err){
+        console.log(err);
+      }
+    }else{
+      alert("Please fill the form completly")
+    }
+  }
+  }
 
   return (
     <>
@@ -18,18 +86,25 @@ const Profile = () => {
         <div className='row container-fluid align-items-center justify-content-center shadow p-2 rounded' id="example-collapse-text">
           {/* upload pic */}
           <label className='text-center'>
-            <input type="file" style={{display:'none'}}/>
-            <img src={uploadImg} width={'200px'} height={'200px'} className='rounded-circle' alt="" />
+            <input onChange={e=>setUserDetails({...userDetails,profilePic:e.target.files[0]})} type="file" style={{display:'none'}}/>
+          {
+            existingProfilePic==""?
+            <img src={preview?preview:uploadImg} width={'200px'} height={'200px'} className='rounded-circle' alt="" />
+            :
+            <img src={preview?preview:`${SERVER_BASE_URL}/upload/${existingProfilePic}`} width={'200px'} height={'200px'} className='rounded-circle' alt="" />
+
+          }
+
           </label>
 
          <div className="mb-2 w-100">
-          <input type="text" placeholder='user Github Link' className='form-control' />
+          <input value={userDetails.github} onChange={e=>setUserDetails({...userDetails,github:e.target.value})} type="text" placeholder='user Github Link' className='form-control' />
          </div>
          <div className="mb-2 w-100">
-          <input type="text" placeholder='user LinkedIn Link' className='form-control' />
+          <input value={userDetails.linkedin} onChange={e=>setUserDetails({...userDetails,linkedin:e.target.value})} type="text" placeholder='user LinkedIn Link' className='form-control' />
          </div>
           <div className="d-grid w-100">
-            <button className="btn btn-warning">
+            <button onClick={handleUserUpdate} className="btn btn-warning">
               Update
             </button>
           </div>
