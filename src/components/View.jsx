@@ -66,7 +66,7 @@ const View = () => {
       {
         userProjects.length>0?
        userProjects?.map(project=>(
-         <div key={project?._id} className="border rounded p-2 d-flex justify-content-between mb-3">
+         <div key={project?._id} className="border border-light rounded p-2 d-flex justify-content-between mb-3">
           <h3>{project?.title}</h3>
           <div className="d-flex align-items-center">
             <div><Edit project={project}/></div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Collapse } from 'react-bootstrap'
-import uploadImg from '../assets/upload.png'
+import uploadImg from '../assets/upload1.png'
 import SERVER_BASE_URL from '../services/serverUrl';
 import {updateUserAPI} from '../services/allAPI'
 

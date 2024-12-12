@@ -13,7 +13,7 @@ const Header = ({insideDashboard}) => {
     navigate('/')
   }
   return (
-    <Navbar style={{zIndex:1}} className="shadow border rounded position-fixed w-100">
+    <Navbar style={{zIndex:1}} className="shadow bg-dark rounded position-fixed w-100">
         <Container>
           <Navbar.Brand>
             <Link to={'/'} className='text-decoration-none fw-bolder'><i className='fa-brands fa-docker'></i>Project Fair</Link>

@@ -18,11 +18,11 @@ const Dashboard = () => {
       <Header insideDashboard={true}/>
       <div className="container-fluid py-5">
         <div className="row">
-          <div className="col-lg-8">
+          <div className="col-lg-8 mt-4">
             <h1>Welcome <span className='text-warning'>{username}</span>,</h1>
             <View/>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4 mt-5">
             <Profile/>
           </div>
         </div>

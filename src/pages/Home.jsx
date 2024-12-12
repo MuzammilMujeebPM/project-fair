@@ -4,6 +4,9 @@ import landingimage from '../assets/bg.png'
 import ProjectCard from '../components/ProjectCard'
 import { Card } from 'react-bootstrap'
 import { homeProjectAPI } from '../services/allAPI'
+import card1 from '../assets/card1.jpg'
+import card2 from '../assets/card2.jpg'
+import card3 from '../assets/card3.jpg'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -92,7 +95,7 @@ const Home = () => {
         <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Text className="d-flex justify-content-center align-items-center flex-column">
-          <img width={'60px'} height={'60px'} className='rounded-circle img-fluid' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
+          <img width={'60px'} height={'60px'} className='rounded-circle img-fluid' src={card1}/>
           <div className="d-flex justify-content-center my-3">
             <i className="fa-solid fa-star text-warning"></i>
             <i className="fa-solid fa-star text-warning"></i>
@@ -109,7 +112,7 @@ const Home = () => {
      <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Text className="d-flex justify-content-center align-items-center flex-column">
-          <img width={'60px'} height={'60px'} className='rounded-circle img-fluid' src='https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg'/>
+          <img width={'60px'} height={'60px'} className='rounded-circle img-fluid' src={card2}/>
           <div className="d-flex justify-content-center my-3">
             <i className="fa-solid fa-star text-warning"></i>
             <i className="fa-solid fa-star text-warning"></i>
@@ -125,7 +128,7 @@ const Home = () => {
      <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Text className="d-flex justify-content-center align-items-center flex-column">
-          <img width={'60px'} height={'60px'} className='rounded-circle img-fluid' src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'/>
+          <img width={'60px'} height={'60px'} className='rounded-circle img-fluid' src={card3}/>
           <div className="d-flex justify-content-center my-3">
             <i className="fa-solid fa-star text-warning"></i>
             <i className="fa-solid fa-star text-warning"></i>

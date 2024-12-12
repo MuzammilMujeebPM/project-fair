@@ -38,7 +38,7 @@ const Projects = () => {
      <Header/>
      <div className="container-fluid">
       <div className="d-flex justify-content-between align-items-center py-5">
-        <h1>All Projects</h1>
+        <h1 style={{marginTop:'25px'}}>All Projects</h1>
         <input onChange={e=>setSearchKey(e.target.value)} type="text" placeholder='Search Projects by their Languege' className='form-control w-25' name="" id="" />
       </div>
       <Row>

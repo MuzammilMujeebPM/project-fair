@@ -45,7 +45,7 @@ const Footer = () => {
          </div>
         </div>
       </div>
-      <p className="text-center mt-3">copyright &copy; July Batch, Media Player App. Built With React</p>
+      <p className="text-center mt-3">copyright &copy; July Batch, Project Fair. Built With React</p>
     </div>
 </div>
     </>
