@@ -22,7 +22,7 @@ const Profile = () => {
       setUserDetails({
         ...userDetails,username:user.username,email:user.email,password:user.password,github:user.github,linkedin:user.linkedin
       })
-      setExistingProfilePic(user.profilePic)
+      setExistingProfilePic(user.profilePic || "")
     }
   },[open])
 
@@ -91,8 +91,9 @@ const Profile = () => {
             existingProfilePic==""?
             <img src={preview?preview:uploadImg} width={'200px'} height={'200px'} className='rounded-circle' alt="" />
             :
-            <img src={preview?preview:`${SERVER_BASE_URL}/upload/${existingProfilePic}`} width={'200px'} height={'200px'} className='rounded-circle' alt="" />
-
+            // <img src={preview?preview:`${SERVER_BASE_URL}/upload/${existingProfilePic}`} width={'200px'} height={'200px'} className='rounded-circle' alt="" />
+            // <img width={'150px'} height={'150px'} className="rounded-circle mb-2" src={preview?preview:`${SERVER_BASE_URL}/upload/${existingProfilePic}`} alt="profile pic" />
+            <img src={preview?preview:`${SERVER_BASE_URL}/upload/${existingProfilePic}`} height={'150px'} width={'150px'} className='rounded-circle' alt="" />
           }
 
           </label>
